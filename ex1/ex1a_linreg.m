@@ -42,6 +42,8 @@ theta = rand(n,1);
 % TODO:  Implement the linear regression objective and gradient computations
 % in linear_regression.m
 %
+
+error = grad_check(@linear_regression, theta, 100, train.X, train.y);
 tic;
 options = struct('MaxIter', 200);
 theta = minFunc(@linear_regression, theta, options, train.X, train.y);
@@ -74,6 +76,8 @@ actual_prices = test.y;
 predicted_prices = theta'*test.X;
 test_rms=sqrt(mean((predicted_prices - actual_prices).^2));
 fprintf('RMS testing error: %f\n', test_rms);
+
+fprintf('Average gradient error is %10f\n',error);
 
 
 % Plot predictions on test data.
